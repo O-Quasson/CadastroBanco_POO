@@ -85,7 +85,7 @@ public class Cliente extends Pessoa{
         for(int i = iid; i < id[0] - 1; i++){
             //faz tanto tempo que eu criei esse código que eu nem lembro a lógica, só fui copiando
             //é da atividade de cadastro de funcionário, ainda
-            //pelo que eu entendi, ele vai passando os registros da direita para a esquerda, apaga o registro final da direita e reduz o número máximo de ids que tem
+            //pelo que eu entendi, ele vai passando os registros da esquerda para a direita, apaga o registro final da direita e reduz o número máximo de ids que tem
             cliente[i] = cliente[i + 1];
             cliente[i].setid(i);
         }
@@ -98,6 +98,6 @@ public class Cliente extends Pessoa{
 
     @Override
     public void cancelar(){
-
+        JOptionPane.showMessageDialog(null, "Cancelando operação...");
     };
 }

@@ -2,6 +2,9 @@ package src.Janela;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,10 +13,13 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import src.Classes.*;
+import src.Metodos.ActionListeners;
 
 public class JanelaRegistros extends JFrame {
     
     public JanelaRegistros(int[] id, Pessoa[] clientes, Conta[] contas){
+        ActionListeners actionListeners = new ActionListeners();
+
         setSize(400, 400);
         setTitle("Lista de Registros");
         setResizable(false);
@@ -38,9 +44,12 @@ public class JanelaRegistros extends JFrame {
             botaoCliente[i[0]] = new JButton(clientes[i[0]].getnome());
             botaoCliente[i[0]].setBounds(25, (60*i[0]), 250, 40);
             int idItem = i[0];
-            botaoCliente[i[0]].addActionListener(acessarRegistro -> {
-                JanelaEditar infoRegistro = new JanelaEditar(contas, clientes, id, idItem);
-                infoRegistro.setVisible(true);
+            botaoCliente[i[0]].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // TODO Auto-generated method stub
+                    actionListeners.acessarRegistro(idItem, id, contas, clientes, JanelaRegistros.this);
+                }
             });
             painel.add(botaoCliente[i[0]]);
         }

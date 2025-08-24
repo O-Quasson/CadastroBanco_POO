@@ -85,7 +85,13 @@ public class ContaPoupanca extends Conta {
 
     @Override
     public void cancelar(){
-
+        //eu não tinha a menor ideia do que colocar aqui e o exercício tava falando que esse método é obrigatório, então eu fiz isso
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+        };
+        JOptionPane.showMessageDialog(null, "Operação cancelada. Nenhuma alteração foi salva");
     };
 
     @Override

@@ -4,9 +4,8 @@ package src.Janela;
 //pae que é pae é pae né pae
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.text.ParseException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -22,6 +21,8 @@ import javax.swing.text.MaskFormatter;
 
 import src.Classes.*;
 import src.Janela.JanelaRegistros;
+import src.Metodos.*;
+
 
 public class Janela extends JFrame {
 
@@ -45,6 +46,9 @@ public class Janela extends JFrame {
         id[0] = 0;
         Pessoa[] cliente = new Cliente[10];
         Conta[] contas = new Conta[10];
+        Mascaras mascaras = new Mascaras();
+        MouseListeners listeners = new MouseListeners();
+        ActionListeners actionListeners = new ActionListeners();
 
         setSize(400, 255);
         setTitle("Java Swing - Desenvolvimento de Sistemas");
@@ -63,43 +67,8 @@ public class Janela extends JFrame {
         JFormattedTextField jtfAgencia = new JFormattedTextField();
         jtfAgencia.setBounds(125, 10, 50,20);
         getContentPane().add(jtfAgencia);
-        jtfAgencia.addMouseListener(new MouseListener() {
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // TODO Auto-generated method stub
-                jtfAgencia.setText("");
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-            
-        });
-
-        MaskFormatter mascaraAgencia = null;
-        try {
-            mascaraAgencia = new MaskFormatter("####");
-        } catch (ParseException e1) {
-            // TODO Auto-generated catch block
-        }
-        mascaraAgencia.install(jtfAgencia);
+        listeners.listenerAgencia(jtfAgencia);
+        mascaras.mascaraAgencia(jtfAgencia);
 
         //usar setText() é um desperdício de linha, viu?
         JLabel jlConta = new JLabel();
@@ -110,43 +79,8 @@ public class Janela extends JFrame {
         JFormattedTextField jtfConta = new JFormattedTextField();
         jtfConta.setBounds(300, 10, 75, 20);
         getContentPane().add(jtfConta);
-        jtfConta.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // TODO Auto-generated method stub
-                jtfConta.setText("");
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-        });
-
-        MaskFormatter mascaraConta = null;
-        try {
-            mascaraConta = new MaskFormatter("########-#");
-            mascaraConta.setPlaceholder("________-_");
-        } catch (ParseException e1) {
-            // TODO Auto-generated catch block
-        }
-        mascaraConta.install(jtfConta);
-
+        listeners.listenerConta(jtfConta);
+        mascaras.mascaraConta(jtfConta);
 
         JSeparator jSeparator01 = new JSeparator();
         jSeparator01.setBounds(10, 40, 365, 10);
@@ -179,43 +113,8 @@ public class Janela extends JFrame {
         JFormattedTextField jtfTelefone = new JFormattedTextField();
         jtfTelefone.setBounds(75, 100, 300, 20);
         add(jtfTelefone);
-
-        MaskFormatter mascaraTelefone = null;
-        try {
-            mascaraTelefone = new MaskFormatter("(##) #####-####");
-            mascaraTelefone.setPlaceholder("(__) _____-____");
-        } catch (ParseException e1) {
-
-        }
-        mascaraTelefone.install(jtfTelefone);
-
-        jtfTelefone.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // TODO Auto-generated method stub
-                jtfTelefone.setText("");
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-        });
+        mascaras.mascaraTelefone(jtfTelefone);
+        listeners.listenerTelefone(jtfTelefone);
 
         //amém, você não pede mais setText() 🙏
         JLabel jlCpf = new JLabel("CPF:");
@@ -226,43 +125,8 @@ public class Janela extends JFrame {
         JFormattedTextField jtfCpf = new JFormattedTextField();
         jtfCpf.setBounds(75, 125, 300, 20);
         add(jtfCpf);
-
-        MaskFormatter mascaraCpf = null;
-        try {
-            mascaraCpf = new MaskFormatter("###.###.###-##");
-            mascaraCpf.setPlaceholder("___.___.___.-__");
-        } catch (ParseException e1) {
-            // TODO Auto-generated catch block
-        }
-        mascaraCpf.install(jtfCpf);
-
-        jtfCpf.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // TODO Auto-generated method stub
-                jtfCpf.setText("");
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                // TODO Auto-generated method stub
-            }
-        });
+        mascaras.mascaraCpf(jtfCpf);
+        listeners.listenerCpf(jtfCpf);
 
         ButtonGroup bgContas = new ButtonGroup();
 
@@ -288,12 +152,11 @@ public class Janela extends JFrame {
         jbRegistros.setMnemonic('A');
         jbRegistros.setEnabled(false);
         add(jbRegistros);
-        jbRegistros.addActionListener(abrirRegistros -> {
-            if(id[0]<1){
-                JOptionPane.showMessageDialog(null, "Não há nenhum registro cadastrado");
-            }else{
-                JanelaRegistros registros = new JanelaRegistros(id, cliente, contas);
-                registros.setVisible(true);
+        jbRegistros.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                actionListeners.abrirRegistros(id, cliente, contas);
             }
         });
 
@@ -303,39 +166,23 @@ public class Janela extends JFrame {
         jbCadastrar.setBounds(35, 190, 100, 23);
         jbCadastrar.setMnemonic('S');
         add(jbCadastrar);
-        jbCadastrar.addActionListener(testandocadastro -> {
-
-            if((jtfAgencia.getText().trim().equals(""))||(jtfConta.getText().trim().equals(""))||(jtfCpf.getText().trim().equals(""))||(jtfEndereco.getText().trim().equals(""))||(jtfNome.getText().trim().equals(""))||(jtfTelefone.getText().trim().equals(""))){
-                JOptionPane.showMessageDialog(null, "Um dos campos de dados está vazio ou incompleto!");
-            }else{
-                //isso daqui é só um placeholder, ignora
-                //eu só cadastrei primeiro com lixo de memória e atualizei depois
-                cliente[id[0]] = new Cliente(WIDTH, getName(), getTitle(), getTitle(), getName());
-                cliente[id[0]].gravar(jtfNome.getText().trim(), jtfEndereco.getText().trim(), jtfTelefone.getText().trim(), jtfCpf.getText().trim(), id[0], cliente);
-                if(jrbPoupanca.isSelected()){
-                    contas[id[0]] = new ContaPoupanca(WIDTH, ALLBITS, getName(), ABORT);
-                    contas[id[0]].gravar(id[0], Integer.parseInt(jtfAgencia.getText().trim()), jtfConta.getText().trim(), 0.0, contas);
-                }else{
-                    contas[id[0]] = new ContaCorrente(WIDTH, ALLBITS, getName(), ABORT);
-                    contas[id[0]].gravar(id[0], Integer.parseInt(jtfAgencia.getText().trim()), jtfConta.getText().trim(), 0.0, contas);
-                }
-                id[0] = id[0]+1;
-                jbRegistros.setEnabled(true);
-                jtfAgencia.setText("");
-                jtfConta.setText("");
-                jtfCpf.setText("");
-                jtfEndereco.setText("");
-                jtfNome.setText("");
-                jtfTelefone.setText("");
-            }
+        jbCadastrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionListeners.cadastrarRegistro(jtfAgencia, jtfConta, jtfNome, jtfEndereco, jtfTelefone, jtfCpf, jrbPoupanca, contas, id, cliente, jbRegistros);
+            };
         });
 
         JButton jbFechar = new JButton("Fechar");
         jbFechar.setBounds(255, 190, 100, 23);
         jbFechar.setMnemonic('F');
         getContentPane().add(jbFechar);
-        jbFechar.addActionListener(fecharJanela -> {
-            dispose();
+        jbFechar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                actionListeners.fecharJanela(Janela.this);
+            };
         });
 
     }
